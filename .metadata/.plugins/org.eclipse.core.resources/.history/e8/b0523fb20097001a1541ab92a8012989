@@ -1,0 +1,324 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<title>BOX SHOP a E-commerce online Shopping Category Flat
+	Bootstarp responsive Website Template| Products :: w3layouts</title>
+<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="BOX SHOP Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript">
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+</script>
+<!--webfont-->
+<link
+	href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+	rel='stylesheet' type='text/css' />
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css' />
+<!-- start menu -->
+<link href="../css/megamenu.css" rel="stylesheet" type="text/css"
+	media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".megamenu").megamenu();
+	});
+</script>
+<!-- start slider -->
+<script src="js/responsiveslides.min.js"></script>
+<script>
+	$(function() {
+		$("#slider").responsiveSlides({
+			auto : true,
+			speed : 500,
+			namespace : "callbacks",
+			pager : true,
+		});
+	});
+</script>
+<!--end slider -->
+<link rel="stylesheet" href="../css/flexslider.css" type="text/css"
+	media="screen" />
+<script type="text/javascript">
+	$(window).load(function() {
+		$("#flexiselDemo").flexisel({
+			visibleItems : 5,
+			animationSpeed : 1000,
+			autoPlay : true,
+			autoPlaySpeed : 3000,
+			pauseOnHover : true,
+			enableResponsiveBreakpoints : true,
+			responsiveBreakpoints : {
+				portrait : {
+					changePoint : 480,
+					visibleItems : 1
+				},
+				landscape : {
+					changePoint : 640,
+					visibleItems : 2
+				},
+				tablet : {
+					changePoint : 768,
+					visibleItems : 3
+				}
+			}
+		});
+
+	});
+</script>
+	<script type="text/javascript">
+			$(window).load(function() {
+				$("#flexiselDemo").flexisel({
+					visibleItems: 4,
+					animationSpeed: 1000,
+					autoPlay: true,
+					autoPlaySpeed: 3000,    		
+					pauseOnHover: true,
+					enableResponsiveBreakpoints: true,
+			    	responsiveBreakpoints: { 
+			    		portrait: { 
+			    			changePoint:480,
+			    			visibleItems: 1
+			    		}, 
+			    		landscape: { 
+			    			changePoint:640,
+			    			visibleItems: 2
+			    		},
+			    		tablet: { 
+			    			changePoint:768,
+			    			visibleItems: 3
+			    		}
+			    	}
+			    });
+			    
+			});
+		</script>
+		<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+
+</head>
+<body>
+	<!-- header-section-starts -->
+		<div sec:authorize="isAuthenticated()">
+		Authenticated as <span sec:authentication="name"></span>
+	</div>
+
+	<div class="header">
+
+		<div class="top-header">
+			<div class="wrap">
+				<div class="header-left">
+					<ul>
+						<li><a href="#">24x7 Customer Care </a>|</li>
+						<li><a href="order.html"> Track Order</a></li>
+					</ul>
+				</div>
+				<div class="header-right">
+					<ul>
+						<!-- <li sec:authorize="isAuthenticated()"><i class="user"></i><a href="/cust/loginCustomer">
+						
+									<span th:text="${#authentication.getPrincipal().getUsername()}">User</span>
+								
+						</a></li> -->
+
+
+						<li><i class="user"></i> <a href="/cust/loginCustomer"><span th:text="${user}"></span></a></li>
+						
+
+						<li class="login"><i class="lock"></i> <a href="/">Logout</a>
+						</li>
+						<li><i class="cart"></i> <a href="#">Shopping Cart</a></li>
+						<li class="last"><span th:text="${noOfItems}"></span></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+		</div>
+		<div class="wrap">
+			<div class="header-bottom">
+				<div class="logo">
+					<a href="index.html"><img src="images/logo.jpg"
+						class="img-responsive" alt="" /></a>
+				</div>
+				<div class="search">
+					<div class="search2">
+						<form>
+							<input type="submit" value="" /> <input type="text"
+								value="Search for a product, category or brand"
+								onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Search for a product, category or brand';}" />
+						</form>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- header-section-ends -->
+	<div class="wrap">
+		<div class="navigation-strip">
+			<h4>
+				Categories<i class="arrow"></i>
+			</h4>
+			<div class="top-menu" th:each="cat : ${cats}">
+				<!-- start header menu -->
+				<ul class="megamenu skyblue">
+					<li><a class="color1" th:href="${cat.productCategory}"
+						th:text="${cat.productCategory}"></a>
+						<div class="megapanel">
+							<div class="row">
+								<div class="col1">
+									<div class="h_nav">
+										<h4>shop</h4>
+										<ul th:each="subCat : ${subCategories}">
+											<li th:if='${cat.productCategory}==${subCat.productCategory}'><a
+												th:href="@{/{id}(id=${subCat.productSubCat})}"
+												th:text="${subCat.productSubCat}">new arrivals</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div></li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="main">
+			<div class="content">
+				<div class="content_top">
+					<div class="heading">
+						<h3>Feature Products</h3>
+					</div>
+					<div class="sort">
+						<p>
+							Sort by: <select>
+								<option>Lowest Price</option>
+								<option>Highest Price</option>
+								<option>Lowest Price</option>
+								<option>Lowest Price</option>
+								<option>Lowest Price</option>
+								<option>In Stock</option>
+							</select>
+						</p>
+					</div>
+					<div class="show">
+						<p>
+							Show: <select>
+								<option>4</option>
+								<option>8</option>
+								<option>12</option>
+								<option>16</option>
+								<option>20</option>
+								<option>In Stock</option>
+							</select>
+						</p>
+					</div>
+					<div class="page-no">
+						<p>Result Pages:
+						<ul>
+							<li><a href="#">1</a></li>
+							<li class="active"><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li>[<a href="#"> Next>>></a>]
+							</li>
+						</ul>
+						</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="section group">
+				<div class="grid images_3_of_2">
+				
+							<ul id="etalage">
+							<li>
+							 <img  class="etalage_source_image"   th:attr="src=@{${pro.strImage}}" />
+							</li>
+							<li> <h2 th:text="${pro.productName}">
+								</h2></li>
+							<li>
+							<p>
+							<span class="strike">â‚¹15000</span><span class="price"
+								th:text="${pro.price}"></span>
+						</p>
+							</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+				
+								<h5>
+									Prodcut Name : <span th:text="${pro.productName}"></span>
+									
+								</h5>
+								<h4>Description:
+								
+									Price: <span th:text="${pro.price}"></span>
+									productType: <span th:text="${pro.productType}"></span>
+									companyName: <span th:text="${pro.companyName}"></span>
+								</h4>
+								
+								<div class="available">
+									
+									<h4>Available Options :</h4>
+									
+									<ul>
+										<li>Color: <select>
+												<option>Silver</option>
+												<option>Black</option>
+												<option>Dark Black</option>
+												<option>Red</option>
+										</select></li>
+										<li>Size: <select>
+												<option>L</option>
+												<option>XL</option>
+												<option>S</option>
+												<option>M</option>
+										</select>
+										</li>
+										<li>Quality: <select>
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+										</select>
+										</li>
+									</ul>
+									<div class="btn_form">
+										<form>
+										<!-- 	<input type="submit" value="add to cart" title=""/> -->
+											<a th:href="@{/cart/{id}(id=${product.productName})}">Add to Cart</a>
+										</form>
+									</div>
+									<span class="span_right"><a href="#">login to save in wishlist </a></span>
+									<div class="clearfix"></div>
+								</div>
+
+						</div>
+						<div class="clearfix"></div>
+					</div>
+			</div>
+</div>
+</body>
+</html>
+
+

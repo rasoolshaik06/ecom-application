@@ -1,0 +1,128 @@
+package com.ecom.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ecom.model.ProductCategory;
+import com.ecom.model.ProductMaster;
+import com.ecom.model.ProductSubCategory;
+import com.ecom.service.CategoryService;
+import com.ecom.service.ProductService;
+import com.ecom.service.SubcategoryService;
+
+@Controller
+public class CartController {
+	
+	@Autowired
+	ProductService productService;
+	
+
+	@Autowired
+	CategoryService categoryService;
+
+	@Autowired
+	SubcategoryService SubcategoryService;
+	
+	@RequestMapping("/cart/{id}")
+	public String addToCart(@PathVariable("id")String pro, HttpServletRequest request,ModelMap map) {
+		
+		
+		List<String> pros=(List<String>) request.getSession().getAttribute("MY_PROS");
+		
+		if (pros == null) {
+			pros = new ArrayList<>();
+			request.getSession().setAttribute("MY_PROS", pros);
+		}
+		pros.add(pro);
+		request.getSession().setAttribute("MY_PROS", pros);
+		
+		System.out.println("list of orders "+pros.size());
+		
+		ProductMaster proMaster=productService.getProductByName(pro);
+		
+		System.out.println("add to cart msg ->"+proMaster.getProductSubCat());
+		
+		return "redirect:/details/"+proMaster.getProductId();
+		//return "redirect:/details/{id}";
+	}
+	
+	@RequestMapping("/cart1/{id}")
+	public String addToCart1(@PathVariable("id")String pro, HttpServletRequest request,ModelMap map) {
+		
+		
+		List<String> pros=(List<String>) request.getSession().getAttribute("MY_PROS");
+		
+		if (pros == null) {
+			pros = new ArrayList<>();
+			request.getSession().setAttribute("MY_PROS", pros);
+		}
+		pros.add(pro);
+		request.getSession().setAttribute("MY_PROS", pros);
+		
+		System.out.println("list of orders "+pros.size());
+		
+		ProductMaster proMaster=productService.getProductByName(pro);
+		
+		System.out.println("add to cart msg ->"+proMaster.getProductSubCat());
+		
+		return "redirect:/"+proMaster.getProductSubCat(); 
+		//return "redirect:/details/{id}";
+	} 
+	
+	@RequestMapping("/carts")
+	public String listOfItemsinCart(HttpServletRequest request, ModelMap map) {
+		List<String> pros=(List<String>) request.getSession().getAttribute("MY_PROS");
+		
+		List<ProductMaster> prods=new ArrayList<>();
+		
+		for(String p:pros) {
+			ProductMaster product=productService.getProductByName(p);
+		prods.add(product);	 
+		}
+	map.addAttribute("carts",prods);
+		
+	
+	
+	List<ProductCategory> categories = categoryService.getAllcats();
+	map.addAttribute("cats", categories);
+
+	List<ProductSubCategory> subcategories = SubcategoryService.getSubCats();
+	map.addAttribute("subCategories", subcategories);
+
+	List<ProductMaster> products = productService.getAllProducts();
+	map.addAttribute("products", products);
+	
+	map.addAttribute("product", new ProductMaster());
+	
+		
+		return "cart";
+	}
+	@RequestMapping(value = "/deleteCart/{id}")
+	public String deleteProductFromCart(@PathVariable("id") String name, HttpServletRequest request,ModelMap map) {
+		
+		List<String> pros=(List<String>) request.getSession().getAttribute("MY_PROS");
+		
+		System.out.println("******************************delete cart controller ***********************************");
+		List<ProductMaster> prods=productService.getAllProducts();
+		System.out.println("prods: ***************************************"+prods);
+		if (pros != null) {
+
+			request.getSession().removeAttribute(name);
+			System.out.println("**********************"+name);
+		}
+		
+		request.getSession().setAttribute("MY_PROS", pros);
+
+		map.addAttribute("carts",prods);
+		return "redirect:/carts";
+	}
+}

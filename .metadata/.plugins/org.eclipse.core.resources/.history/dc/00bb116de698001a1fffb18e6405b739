@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BOX SHOP a E-commerce online Shopping Category Flat
+	Bootstarp responsive Website Template| Single :: w3layouts</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="BOX SHOP Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!-- start menu -->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<!-- start slider -->
+<script src="js/responsiveslides.min.js"></script>
+
+<link rel="stylesheet" href="../css/etalage.css">
+<script src="../js/jquery.etalage.min.js"></script>
+<script>
+	jQuery(document)
+			.ready(
+					function($) {
+
+						$('#etalage')
+								.etalage(
+										{
+											thumb_image_width : 300,
+											thumb_image_height : 400,
+											source_image_width : 800,
+											source_image_height : 1000,
+											show_hint : true,
+											click_callback : function(
+													image_anchor, instance_id) {
+												alert('Callback example:\nYou clicked on an image with the anchor: "'
+														+ image_anchor
+														+ '"\n(in Etalage instance: "'
+														+ instance_id + '")');
+											}
+										});
+
+					});
+</script>
+<link rel="stylesheet" href="../css/flexslider.css" type="text/css"
+	media="screen" />
+<script type="text/javascript">
+	$(window).load(function() {
+		$("#flexiselDemo").flexisel({
+			visibleItems : 4,
+			animationSpeed : 1000,
+			autoPlay : true,
+			autoPlaySpeed : 3000,
+			pauseOnHover : true,
+			enableResponsiveBreakpoints : true,
+			responsiveBreakpoints : {
+				portrait : {
+					changePoint : 480,
+					visibleItems : 1
+				},
+				landscape : {
+					changePoint : 640,
+					visibleItems : 2
+				},
+				tablet : {
+					changePoint : 768,
+					visibleItems : 3
+				}
+			}
+		});
+
+	});
+</script>
+<script type="text/javascript" src="../js/jquery.flexisel.js"></script>
+</head>
+<body>
+	<!-- header-section-starts -->
+	<div class="header">
+		<div class="top-header">
+			<div class="wrap">
+				<div class="header-left">
+					<ul>
+						<li><a href="#">24x7 Customer Care </a></li> |
+						<li><a href="order.html"> Track Order</a></li>
+					</ul>
+				</div>
+				<div class="header-right" th:if="${user==null}">
+					<ul>
+						<li>
+							<i class="user"></i>
+							<a href="/login1">My Account</a>
+						</li>
+						<li class="login">
+							<i class="lock"></i>
+							<a href="/login1">Login</a>|
+						</li>
+						<li>
+							<i class="cart"></i>
+							<a href="/carts">Shopping Cart</a>
+						</li>
+						<li class="last"><span th:text="${cartCount}"></li>
+					</ul>
+					<div class="sign-up-right">
+						<a href="/cust">Sign Up</a>
+					</div>
+				</div>
+				
+				<div class="header-right" th:if="${user!=null}">
+					<ul>
+						<li>
+							<i class="user"></i>
+							<a th:href="@{/userdetails/{id}(id=${user.userName})}"><span th:text="${user.userName}"></span></a>
+						</li>
+						<li class="login">
+							<i class="lock"></i>
+							<a href="/logout">logout</a>|
+						</li>
+						<li>
+							<i class="cart"></i>
+							<a href="#">Shopping Cart</a>
+						</li>
+						<li class="last"><span th:text="${cartCount}"></li>
+					</ul>
+					
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="header-bottom">
+				<div class="logo">
+					<a href="index.html"><img src="../images/logo.jpg"
+						class="img-responsive" alt="" /></a>
+				</div>
+				<div class="search">
+					<div class="search2">
+						<form>
+							<input type="submit" value=""> <input type="text"
+								value="Search for a product, category or brand"
+								onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Search for a product, category or brand';}" />
+						</form>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- header-section-ends -->
+<div class="wrap">
+		<div class="navigation-strip">
+			<h4>
+				Categories<i class="arrow"></i>
+			</h4>
+			<div class="top-menu" th:each="cat : ${cats}">
+				<!-- start header menu -->
+				<ul class="megamenu skyblue">
+					<li><a class="color1" th:href="${cat.productCategory}"
+						th:text="${cat.productCategory}"></a>
+						<div class="megapanel">
+							<div class="row">
+								<div class="col1">
+									<div class="h_nav">
+										<ul th:each="subCat : ${subCategories}">
+											<li th:if='${cat.productCategory}==${subCat.productCategory}'><a
+												th:href="@{/{id}(id=${subCat.productSubCat})}"
+												th:text="${subCat.productSubCat}">new arrivals</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div></li>
+			</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div>
+		
+		
+		
+		</div>
+		
+	<!-- 	 <div class="section group">
+	      
+	      <div th:if="${carts.empty}">
+	      <p style="color:red;text-align: center;"> No Products found</p>
+	      </div>
+	      
+				<div class="grid_1_of_4 images_1_of_4" th:each="product,prodStatus : ${carts}">
+					 <a href="#"><img th:attr="src=@{${product.strImage}}" alt="" /></a>
+					 <h2 th:text="${product.productName}"></h2>
+					 <p th:text="${product.specification}"></p>
+					 <p></span><span class="price" th:text="${product.price}"></span></p>
+					Quantity:<p th:text="${prodStatus.index+1}"></p>
+
+					 <div class="button"><span><a th:href="" class="cart-button">Buy</a></span> </div>
+				     <div class="button">Quantity</div>
+				</div>
+				<div class="clearfix"></div>
+			</div> -->
+	 <div class="section group">
+	
+	
+	<div  th:if="${carts.empty}">
+				<p colspan="4"><span style="color:red">No products available</span></p>
+			</div>
+			
+			<div class="grid_1_of_4 images_1_of_4" th:each="product,prodStatus : ${carts}">
+			<img th:attr="src=@{${product.strImage}}" alt="" />
+			<p th:text="${prodStatus.index+1}"></p>
+			<h2 th:text="${product.productName}"></h2>
+			<p th:text="${product.specification}"></p>
+			<p th:text="${product.price}"></p>
+			<div class="btn btn-danger"><span><a th:href="@{/deleteCart/{id}(id=${product.productName})}" class="details">Remove</a></span></div>
+			</div>
+	
+	</div> 
+
+</html>
