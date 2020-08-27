@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- start order -->
+	<div class="wrap">
+		<div class="col-md-12">
+			<table class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th>Order Id</th>
+						<th>Product Id</th>
+						<th>Product each price</th>
+						<th>Product quantity</th>
+						<th>total price</th>
+						<th>Ordered Date</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${orders.empty}">
+						<td colspan="4"><span style="color: red">No orders
+								available</span></td>
+					</tr>
+					<tr th:each="order: ${orders}">
+						<td th:text="${order.orderItemId}"></td>
+						<td th:text="${order.productId}"></td>
+						<td th:text="${order.priceEach}"></td>
+						<td th:text="${order.quantity}"></td>
+						<td th:text="${order.priceTotal}"></td>
+						<td th:text="${order.approveDate}"></td>
+					</tr>
+					<tr>
+					<tr>
+						<a th:href="@{/pdf}"><i class="fa fa-file-pdf-o"
+							style="font-size: 20px" title="Export to PdF!">Export to PdF</i></a>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="pagination-div">
+    <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/pages(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+        <span th:unless="${page.number == i}">
+             <a th:href="@{/orders(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+    </th:block>
+    <span th:if="${page.hasNext()}">
+        <a th:href="@{/pages(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+</div>
+
+		</div>
+	</div>
+</body>
+</html>

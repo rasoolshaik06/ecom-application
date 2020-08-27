@@ -1,7 +1,11 @@
 package com.ecom.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Customer {
@@ -21,6 +25,11 @@ public class Customer {
 	
 	private boolean status=true;
 
+	
+/*	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Address> cAddress;
+	
+*/	
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -82,6 +91,10 @@ public class Customer {
 		return "Customer [mobileNumber=" + mobileNumber + ", customerName=" + customerName + ", emailId=" + emailId
 				+ ", password=" + password + ", secQuation=" + secQuation + ", secAns=" + secAns + ", status=" + status
 				+ "]";
+	}
+
+	public Customer() {
+		super();
 	}
 
 	

@@ -33,8 +33,7 @@ public class AddressService {
 	}
 
 	public List<Address> getAllAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		return addressDao.getAllAddress();
 	}
 	
 }

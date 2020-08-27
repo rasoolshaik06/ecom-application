@@ -1,0 +1,27 @@
+<h1 style="color:red;">select your payment method</h1>
+
+ <input type="radio" id="male" name="gender" value="male">
+  <label for="cod">Cash on delivery</label><br>
+
+  <hr style="width:30%;text-align:left;margin-left:0">
+
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="card">Debit/credit card</label><br>
+  <br>
+  <br>
+  <br>
+  <div align="center">
+
+<div class="form-group">
+	<label th:for="payment">Payment</label>
+	<select th:feild="*{modeOfPayment}">
+		<option th:each="mode : ${modeOfPayments}"
+				th:text="${mode.payment}"
+				th:value="${mode}"></option>
+	
+	</select>
+</div>
+
+
+  <button><a href="/purchase">continue</a> </button>
+  </div>

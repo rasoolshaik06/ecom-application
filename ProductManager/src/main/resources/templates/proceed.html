@@ -1,88 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="ISO-8859-1">
-<title>proceed product</title>
+<title>Insert title here</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
-<!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- Custom Theme files -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="BOX SHOP Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--webfont-->
-<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!-- start menu -->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
-<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-<!-- start slider -->
-<script src="js/responsiveslides.min.js"></script>
-
-<link rel="stylesheet" href="../css/etalage.css">
-<script src="../js/jquery.etalage.min.js"></script>
-<script>
-	jQuery(document)
-			.ready(
-					function($) {
-
-						$('#etalage')
-								.etalage(
-										{
-											thumb_image_width : 300,
-											thumb_image_height : 400,
-											source_image_width : 800,
-											source_image_height : 1000,
-											show_hint : true,
-											click_callback : function(
-													image_anchor, instance_id) {
-												alert('Callback example:\nYou clicked on an image with the anchor: "'
-														+ image_anchor
-														+ '"\n(in Etalage instance: "'
-														+ instance_id + '")');
-											}
-										});
-
-					});
-</script>
-<link rel="stylesheet" href="../css/flexslider.css" type="text/css"
-	media="screen" />
-<script type="text/javascript">
-	$(window).load(function() {
-		$("#flexiselDemo").flexisel({
-			visibleItems : 4,
-			animationSpeed : 1000,
-			autoPlay : true,
-			autoPlaySpeed : 3000,
-			pauseOnHover : true,
-			enableResponsiveBreakpoints : true,
-			responsiveBreakpoints : {
-				portrait : {
-					changePoint : 480,
-					visibleItems : 1
-				},
-				landscape : {
-					changePoint : 640,
-					visibleItems : 2
-				},
-				tablet : {
-					changePoint : 768,
-					visibleItems : 3
-				}
-			}
-		});
-
-	});
-</script>
-<script type="text/javascript" src="../js/jquery.flexisel.js"></script>
-</head>
 
 <script>
 $(document).ready(function(){
@@ -140,32 +63,33 @@ $(document).ready(function(){
 </head>
 <body>
 
+<h3 >Hello, <span th:text="${user}"></span></h3>
 
-<h3 >Hello Dear:  <span th:text="${user}"></span> </h3>
+<h2 style="color:red;">please Select Some address</h2>
 
-<!-- <h2 style="color:red;">please Select Some address</h2>
-
-		 	<div th:if="${ads.empty}">
+			<div th:if="${ads.empty}">
 				<p colspan="4"><span style="color:red">No address available</span></p>
 				<hr>
-			</div> -->
+			</div>
 			<div align="center" th:each="cat,catStatus : ${ads}">
 				<p style="color:red;">address is <span th:text="${catStatus.index+1}"></span></p>
 				<p>H.No : <span th:text="${cat.address}"></span></p>
 				<p>Land mark :  <span th:text="${cat.landmark}"></span></p>
 				<p>Pin code : <span th:text="${cat.pincode}"></span></p>
 				
-				<button style="color: blue;"><a style="text-decoration: none;" href="/buy">Deliver to this address</a></button>
+				<button style="color: blue;"><a href="/buy">Deliver to this address</a></button>
 				
 				<hr style="width:20%;text-align:center;">
 			
 			</div>
 
+<h2 style="color:red;">please enter your Address for Delivery</h2>
 
 
-<form action="#" th:object="${add}" method="post" align="center">
-<h3 style="color:red;">please enter your Address for Delivery</h3>
+<form th:action="@{/custAddress}" th:object="${add}" method="post" align="center">
 		<pre>
+	Contact No :   <input type="text" th:field="*{contactNo}">
+	
 	Address : <input type="text" th:field="*{address}">
 	
 	Landmark : <input type="text" th:field="*{landmark}">

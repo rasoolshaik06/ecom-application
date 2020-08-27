@@ -8,6 +8,9 @@ import java.util.Set;
 public class Users {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userId;
+	
 	private String mobileNumber;
 	
 	private String userName;
@@ -37,7 +40,16 @@ public class Users {
         this.secAns =users.getSecAns();
         this.mobileNumber = users.getMobileNumber();
         this.password = users.getPassword();
+        this.userId=users.getUserId();
     }
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getMobileNumber() {
 		return mobileNumber;

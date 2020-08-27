@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ecom.jpa.AddressJpa;
 import com.ecom.jpa.CityJpa;
 import com.ecom.jpa.CountryJpa;
 import com.ecom.jpa.StateJpa;
+import com.ecom.model.Address;
 import com.ecom.model.City;
 import com.ecom.model.Country;
 import com.ecom.model.State;
 
 @Repository
-public class AddressDao {
+public class AddressDao   {
 	
 	@Autowired
 	CountryJpa countryJpa;
@@ -23,6 +25,10 @@ public class AddressDao {
 	
 	@Autowired
 	CityJpa cityJpa;
+	
+	@Autowired
+	AddressJpa addressJpa;
+	
 	
 	public List<Country> getCountries(){
 		
@@ -46,5 +52,10 @@ public class AddressDao {
 		
 		countryJpa.save(null);
 	}
+	
+	public List<Address> getAllAddress(){
+	return addressJpa.findAll();	
+	}
+	
 
 }
